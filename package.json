@@ -1,0 +1,21 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "ch2": "vite --mode ch2 --host --port 3000",
+    "ch4": "vite --mode ch4 --host --port 3000",
+    "ch5": "vite --mode ch5 --host --port 3000",
+    "ch6": "vite --mode ch6 --host --port 3000",
+    "ch7": "vite --mode ch7 --host --port 3000",
+    "ch9": "vite --mode ch9 --host --port 3000",
+    "ch13": "vite --mode ch13 --host --port 3000"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "keycloak-js": "^26.0.5"
+  }
+}

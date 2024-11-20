@@ -1,11 +1,10 @@
 {
   "dockerComposeFile": "docker-compose.yml",
-  "forwardPorts": [ "keycloak:8080" ],
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "customizations": {
     "vscode": {
-      "extensions": ["denoland.vscode-deno"]
+      "extensions": ["esbenp.prettier-vscode"]
     }
   },
   "features": {
@@ -16,6 +15,19 @@
     "ghcr.io/joshuanianji/devcontainer-features/github-cli-persistence:1": {},
     "ghcr.io/devcontainers-community/features/deno:1": {
       "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "nodeGypDependencies": true,
+      "installYarnUsingApt": true,
+      "version": "lts",
+      "pnpmVersion": "latest",
+      "nvmVersion": "latest"
+    },
+    "ghcr.io/devcontainers-extra/features/apt-get-packages:1": {
+      "clean_ppas": true,
+      "preserve_apt_list": true,
+      "packages": "curl,ca-certificates,htop,btop,iputils-ping",
+      "ppas": "ppa:deadsnakes/ppa"
     }
   }
 }
