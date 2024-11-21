@@ -18,3 +18,4 @@ services:
       - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
     volumes:
       - ./data:/opt/keycloak/data
+      - ./themes:/opt/keycloak/themes

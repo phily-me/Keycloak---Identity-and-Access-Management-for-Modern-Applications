@@ -1,2 +1,5 @@
-.devcontainer/data/
+.DS_Store
+.devcontainer/data/*
+.devcontainer/themes/*
 node_modules
+
