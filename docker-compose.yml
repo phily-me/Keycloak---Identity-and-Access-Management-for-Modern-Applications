@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:17.0-alpine3.20
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    labels:
+      - docker-volume-backup.stop-during-backup=true
+    restart: unless-stopped
+    networks:
+      - keycloak-network
+
+  keycloak:
+    image: keycloak/keycloak:26.0.0
+    command: start --proxy-headers xforwarded
+    environment:
+      KC_HOSTNAME: id.zameit.com
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "12081:8080"
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    networks:
+      - keycloak-network
+
+volumes:
+  postgres-data:
+
+networks:
+  keycloak-network:
+    driver: bridge
